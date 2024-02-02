@@ -44,7 +44,7 @@ async function initMap() {
             return [];
         });
     const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 24,
+        zoom: 20,
         center: { lat: 34.180732, lng: -118.320883 },
         mapId: "mapForUniuni",
     });
@@ -77,15 +77,12 @@ async function initMap() {
         content: "",
         disableAutoPan: true,
     });
-    // Create an array of alphabetical characters used to label the markers.
-    const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
     // Add some markers to the map.'
-    console.log(typeof codes);
     const markers = codes.map((code, i) => {
-        const label = labels[i % labels.length];
         const pinGlyph = new google.maps.marker.PinElement({
-            glyph: label,
-            glyphColor: "white",
+            glyph: code.code_help ? code.code_help : "...",
+            glyphColor: "black",
         });
         const marker = new google.maps.marker.AdvancedMarkerElement({
             position: code.location,

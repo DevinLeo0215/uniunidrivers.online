@@ -44,7 +44,7 @@ async function initMap() {
             return [];
         });
     const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 12,
+        zoom: 24,
         center: { lat: 34.180732, lng: -118.320883 },
         mapId: "mapForUniuni",
     });

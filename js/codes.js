@@ -16,7 +16,7 @@ async function initMap() {
             console.error("Error fetching codes: ", error);
             return [];
         });
-    const pos = { lat: 34.2353042, lng: -118.4744892 };
+    const pos = { lat: 34.2317337, lng: -118.4711903 };
     try {
         navigator.geolocation.getCurrentPosition(
             (position) => {

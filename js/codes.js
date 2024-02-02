@@ -81,7 +81,7 @@ async function initMap() {
 
     // Add some markers to the map.'
     const markers = codes.map((code, i) => {
-        let ele = document.createElement("h3");
+        let ele = document.createElement("h2");
         ele.innerText = code.code_help ? code.code_help : "...";
         const pinGlyph = new google.maps.marker.PinElement({
             glyph: ele,

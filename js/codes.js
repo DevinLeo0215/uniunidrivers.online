@@ -31,7 +31,7 @@ async function initMap() {
     }
     console.log(pos);
     const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 20,
+        zoom: 18,
         center: pos,
         mapId: "mapForUniuni",
     });

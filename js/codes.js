@@ -17,6 +17,7 @@ async function initMap() {
             return [];
         });
     const pos = { lat: 34.2317337, lng: -118.4711903 };
+
     try {
         navigator.geolocation.getCurrentPosition(
             (position) => {
@@ -44,6 +45,25 @@ async function initMap() {
                     pos.lng = position.coords.longitude;
                     map.setCenter(pos);
                     clearInterval(refreshMap);
+                },
+                () => {
+                    handleLocationError(true, infoWindow, map.getCenter());
+                },
+            );
+        } else {
+            handleLocationError(false, infoWindow, map.getCenter());
+        }
+    }, 200)
+    setInterval(function() {
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    if (pos.lat != position.coords.latitude || pos.lng != position.coords.longitude) {
+                        pos.lat = position.coords.latitude;
+                        pos.lng = position.coords.longitude;
+                        map.setCenter(pos);
+                    }
                 },
                 () => {
                     handleLocationError(true, infoWindow, map.getCenter());

@@ -64,6 +64,8 @@ async function initMap() {
         const pinGlyph = new google.maps.marker.PinElement({
             glyph: code.code_help ? code.code_help : "...",
             glyphColor: "black",
+            scale: 3,
+            background: "#FBBC04",
         });
         const marker = new google.maps.marker.AdvancedMarkerElement({
             position: code.location,

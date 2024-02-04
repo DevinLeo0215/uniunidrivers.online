@@ -3,109 +3,86 @@
 async function initMap() {
     // Request needed libraries.
     const { Map, InfoWindow } = await google.maps.importLibrary("maps");
-    const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary(
-        "marker",
-    );
-    const codes = await fetch("./burbank/codes.json")
-        .then((response) => response.json())
-        .then((data) => {
-            localStorage.setItem("codes", JSON.stringify(data));
-            return data;
-        })
-        .catch((error) => {
-            console.error("Error fetching codes: ", error);
-            return [];
-        });
-    const pos = { lat: 34.2317337, lng: -118.4711903 };
-
-    try {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                pos.lat = position.coords.latitude;
-                pos.lng = position.coords.longitude;
-                console.log(pos);
-            },
-            () => {},
-        );
-    } catch (err) {
-        console.log(err);
-    }
-    console.log(pos);
+    const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
+    const initCenter = { lat: 34.2317337, lng: -118.4711903 };
     const map = new google.maps.Map(document.getElementById("map"), {
         zoom: 18,
-        center: pos,
+        center: initCenter,
         mapId: "mapForUniuni",
     });
-    const refreshMap = setInterval(function() {
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    pos.lat = position.coords.latitude;
-                    pos.lng = position.coords.longitude;
-                    map.setCenter(pos);
-                    clearInterval(refreshMap);
-                },
-                () => {
-                    handleLocationError(true, infoWindow, map.getCenter());
-                },
-            );
-        } else {
-            handleLocationError(false, infoWindow, map.getCenter());
-        }
-    }, 200)
-    setInterval(function() {
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    if (pos.lat != position.coords.latitude || pos.lng != position.coords.longitude) {
-                        pos.lat = position.coords.latitude;
-                        pos.lng = position.coords.longitude;
-                        map.setCenter(pos);
-                    }
-                },
-                () => {
-                    handleLocationError(true, infoWindow, map.getCenter());
-                },
-            );
-        } else {
-            handleLocationError(false, infoWindow, map.getCenter());
-        }
-    }, 1000)
+
 
     const infoWindow = new google.maps.InfoWindow({
         content: "",
         disableAutoPan: true,
-    });
+    })
+    fetch("./burbank/codes.json")
+        .then((response) => response.json())
+        .then((codes) => {
+            // Add some markers to the map.'
+            codes.map((code, i) => {
+                let ele = document.createElement("h2");
+                ele.innerText = code.code_help ? code.code_help : "...";
+                const pinGlyph = new google.maps.marker.PinElement({
+                    glyph: ele,
+                    glyphColor: "black",
+                    scale: 3,
+                    background: "#FBBC04",
+                });
+                const marker = new google.maps.marker.AdvancedMarkerElement({
+                    position: code.location,
+                    content: pinGlyph.element,
+                    title: code.code_help,
+                    map: map
+                });
 
-    // Add some markers to the map.'
-    const markers = codes.map((code, i) => {
-        let ele = document.createElement("h2");
-        ele.innerText = code.code_help ? code.code_help : "...";
-        const pinGlyph = new google.maps.marker.PinElement({
-            glyph: ele,
-            glyphColor: "black",
-            scale: 4,
-            background: "#FBBC04",
+                // markers can only be keyboard focusable when they have click listeners
+                // open info window when marker is clicked
+                marker.addListener("click", () => {
+                    console.log(code);
+                    infoWindow.setContent(`<h3>${code.code_help}</h3><h4>${code.address}</h4>`);
+                    infoWindow.open(map, marker);
+                });
+            });
+        })
+        .catch((error) => {
+            console.error("Error fetching codes: ", error);
         });
-        const marker = new google.maps.marker.AdvancedMarkerElement({
-            position: code.location,
-            content: pinGlyph.element,
-            title: code.code_help,
-            map: map
-        });
+    // Try HTML5 geolocation
+    if (navigator.geolocation) {
+        navigator.geolocation.watchPosition(function(position) {
+            var realtimePosition = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
 
-        // markers can only be keyboard focusable when they have click listeners
-        // open info window when marker is clicked
-        marker.addListener("click", () => {
-            infoWindow.setContent(code.code_help);
-            infoWindow.open(map, marker);
+            // Center the map on the user's current position
+            map.setCenter(realtimePosition);
+
+            // Create a marker for the user's position with a car icon
+            var marker = new google.maps.Marker({
+                position: realtimePosition,
+                map: map,
+                title: 'Your Position',
+                icon: {
+                    path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                    scale: 6,
+                    rotation: position.coords.heading || 0,
+                    fillColor: 'green',
+                    fillOpacity: 0.8,
+                    strokeWeight: 2,
+                    strokeColor: 'green'
+                }
+            });
+        }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
         });
-        return marker;
-    });
+    } else {
+        // Browser doesn't support geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+    }
+
+
 
 }
-
-
 initMap();

@@ -1,13 +1,13 @@
 [{
         "state": "CA",
-        "zip_code": "xxxxxx",
+        "zip_code": "91506",
         "location": {
-            "lat": 34.1502798,
-            "lng": -118.0915562
+            "lat": 34.180732,
+            "lng": -118.320883
         },
-        "code_help": "test",
-        "address": "xxxxxxxxx",
-        "city": "xxxxxxx"
+        "code_help": "warehouse",
+        "address": "burbank warehouse",
+        "city": "Burbank"
     },
     {
         "state": "CA",

@@ -1,82 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="./css/theme.css" />
     <title>Uniuni Drivers</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <!-- 导航栏 -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="#">Uniuni Drivers</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+        <a class="navbar-brand" href="#">Uniuni Drivers</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="./index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./drivers.html">Uniuni Drivers</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./codes.html">Apartment codes</a>
-          </li>
-        </ul>
-      </div>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="./index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./drivers.html">Uniuni Drivers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./entryInfo.html">Entry Info</a>
+                </li>
+            </ul>
+        </div>
     </nav>
 
     <!-- 主要内容区域 -->
     <div class="container mt-5" style="padding-top: 20px">
-      <div class="accordion" id="accordionBox">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="heading">
-            <button
-              class="accordion-button"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseWrap"
-              aria-expanded="true"
-              aria-controls="collapseWrap"
-            >
+        <div class="accordion" id="accordionBox">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWrap" aria-expanded="true" aria-controls="collapseWrap">
               <span class="first_name"></span>
               <span>-</span>
               <span class="driver_id"></span>
             </button>
-          </h2>
-          <div
-            id="collapseWrap"
-            class="accordion-collapse collapse bg-dark"
-            aria-labelledby="heading"
-            data-bs-parent="#accordionBox"
-          >
-            <div class="accordion-body">
-              <p><span class="legal_name"></span></p>
-              <p><span class="phone"></span></p>
-              <p>Zelle:<span class="zelle"></span></p>
-              <p>Account Number:<span class="account_number"></span></p>
-              <p>Routing Number:<span class="routing_number"></span></p>
+                </h2>
+                <div id="collapseWrap" class="accordion-collapse collapse bg-dark" aria-labelledby="heading" data-bs-parent="#accordionBox">
+                    <div class="accordion-body">
+                        <p><span class="legal_name"></span></p>
+                        <p><span class="phone"></span></p>
+                        <p>Zelle:<span class="zelle"></span></p>
+                        <p>Account Number:<span class="account_number"></span></p>
+                        <p>Routing Number:<span class="routing_number"></span></p>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./data/drivers.js"></script>
     <script src="./js/drivers.js"></script>
-  </body>
+</body>
+
 </html>

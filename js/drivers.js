@@ -1,21 +1,6 @@
-// fetch and store codes
-fetch("./burbank/drivers.json")
-    .then((response) => response.json())
-    .then((data) => {
-        localStorage.setItem("drivers", JSON.stringify(data));
-        renderDrivers();
-    })
-    .catch((error) => {
-        renderDrivers();
-    });
-
+renderDrivers();
 // Call the txtToJson function to fetch and store the data
 function renderDrivers() {
-    const drivers = JSON.parse(localStorage.getItem("drivers"));
-    if (!drivers) {
-        console.error("bad net and none local save drivers");
-        return false;
-    }
     const accordionBox = document.querySelector("#accordionBox");
     const eleClone = accordionBox
         .querySelector(".accordion-item")
@@ -42,4 +27,3 @@ function renderDrivers() {
         accordionBox.append(accordionItem);
     });
 }
-console.log("3123123123");

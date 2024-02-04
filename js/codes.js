@@ -8,7 +8,7 @@ async function initMap() {
     const map = new google.maps.Map(document.getElementById("map"), {
         zoom: 18,
         center: initCenter,
-        mapId: "mapForUniuni",
+        mapId: '658585d5ff90d9e1'
     });
 
 
@@ -20,7 +20,7 @@ async function initMap() {
         .then((response) => response.json())
         .then((codes) => {
             // Add some markers to the map.'
-            codes.map((code, i) => {
+            const markers = codes.map((code, i) => {
                 let ele = document.createElement("h2");
                 ele.innerText = code.code_help ? code.code_help : "...";
                 const pinGlyph = new google.maps.marker.PinElement({
@@ -43,7 +43,12 @@ async function initMap() {
                     infoWindow.setContent(`<h3>${code.code_help}</h3><h4>${code.address}</h4>`);
                     infoWindow.open(map, marker);
                 });
+                return marker;
             });
+            // Add a marker clusterer to manage the markers.
+            console.log("markerClusterer");
+            console.log(markerClusterer.MarkerClusterer);
+            const markerCluster = new markerClusterer.MarkerClusterer({ markers, map });
         })
         .catch((error) => {
             console.error("Error fetching codes: ", error);

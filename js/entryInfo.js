@@ -7,38 +7,16 @@ function updateUserPosition(position) {
         lat: position.coords.latitude,
         lng: position.coords.longitude
     };
-
-    // 如果标记不存在，则创建标记
-    if (!user) {
-        user = new google.maps.Marker({
-            position: userPos,
-            map: map,
-            title: 'YOU',
-            icon: {
-                path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-                scale: 6,
-                rotation: position.coords.heading || 0,
-                fillColor: 'blue',
-                fillOpacity: 0.8,
-                strokeWeight: 2,
-                strokeColor: 'black'
-            }
-        });
-    } else {
-        // 更新标记的位置和方向
-        user.setPosition(userPos);
-        user.setIcon({
-            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-            scale: 6,
-            rotation: position.coords.heading || 0,
-            fillColor: 'blue',
-            fillOpacity: 0.8,
-            strokeWeight: 2,
-            strokeColor: 'black'
-        });
-    }
-
-    // 将地图中心设置为用户位置
+    user.setPosition(userPos);
+    user.setIcon({
+        path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+        scale: 6,
+        rotation: position.coords.heading || 0,
+        fillColor: 'blue',
+        fillOpacity: 0.8,
+        strokeWeight: 2,
+        strokeColor: 'black'
+    });
     map.setCenter(userPos);
 }
 // 处理地理定位错误
@@ -57,6 +35,20 @@ async function initMap() {
         zoom: 18,
         center: initCenter,
         mapId: '658585d5ff90d9e1'
+    });
+    user = new google.maps.Marker({
+        position: entryInfo[0].location,
+        map: map,
+        title: 'YOU',
+        icon: {
+            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+            scale: 6,
+            rotation: 0,
+            fillColor: 'blue',
+            fillOpacity: 0.8,
+            strokeWeight: 2,
+            strokeColor: 'black'
+        }
     });
     // 尝试使用 HTML5 地理定位
     if (navigator.geolocation) {

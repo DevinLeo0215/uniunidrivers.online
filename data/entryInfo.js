@@ -5,8 +5,8 @@ var entryInfo = [{
             "lat": 34.180732,
             "lng": -118.320883
         },
-        "code_help": "warehouse",
-        "address": "burbank warehouse",
+        "code_help": "Warehouse",
+        "address": "Near 719 N Victory Blvd",
         "city": "Burbank"
     },
     {

@@ -52,17 +52,18 @@ async function initMap() {
     });
     // 尝试使用 HTML5 地理定位
     if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(updateUserPosition, handleLocationError);
         navigator.geolocation.watchPosition(updateUserPosition, handleLocationError);
     } else {
         // 浏览器不支持地理定位
         handleLocationError(false, map.getCenter());
     }
     const infoWindow = new google.maps.InfoWindow({
-            content: "",
-            disableAutoPan: true,
-            ariaLabel: "Uluru",
-        })
-        // Add some markers to the map.'
+        content: "",
+        disableAutoPan: true,
+        ariaLabel: "Uluru",
+    });
+    // Add some markers to the map.'
     const markers = entryInfo.map((item, i) => {
         let ele = document.createElement("h2");
         ele.innerText = item.code_help ? item.code_help : "...";
@@ -84,14 +85,16 @@ async function initMap() {
         marker.addListener("click", () => {
             console.log(item);
             let itemImage = item.image ? item.image : "sample.png",
+                itemLat = item.location.lat ? item.location.lat : "",
+                itemLng = item.location.lng ? item.location.lng : "",
                 itemAddress = item.address ? item.address : "",
                 itemCodeHelp = item.code_help ? item.code_help : "";
-            infoWindow.setContent(`<h3>${itemAddress} [${itemCodeHelp}]</h3><div class="help-image"><img src="helpImages/${itemImage}"/></div>`);
+            console.log(itemLat, itemLng);
+            infoWindow.setContent(`<h3>${itemAddress} (${itemLat},${itemLng})</h3><h3>${itemCodeHelp}</h3><div class="help-image"><img src="helpImages/${itemImage}"/></div>`);
             infoWindow.open(map, marker);
         });
         return marker;
     });
     // Add a marker clusterer to manage the markers.
     const markerCluster = new markerClusterer.MarkerClusterer({ markers, map });
-
 }

@@ -84,7 +84,7 @@ async function initMap() {
         // open info window when marker is clicked
         marker.addListener("click", () => {
             console.log(item);
-            let itemImage = item.image ? item.image : "sample.png",
+            let itemImage = item.image ? item.image : "img0000.png",
                 itemLat = item.location.lat ? item.location.lat : "",
                 itemLng = item.location.lng ? item.location.lng : "",
                 itemAddress = item.address ? item.address : "",

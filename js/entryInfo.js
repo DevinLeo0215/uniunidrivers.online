@@ -90,7 +90,8 @@ async function initMap() {
                 itemAddress = item.address ? item.address : "",
                 itemCodeHelp = item.code_help ? item.code_help : "";
             console.log(itemLat, itemLng);
-            infoWindow.setContent(`<h3>${itemAddress} (${itemLat},${itemLng})</h3><h3>${itemCodeHelp}</h3><div class="help-image"><img src="./images/${itemImage}"></div>`);
+            alert(`<h3>${itemAddress} (${itemLat},${itemLng})</h3><h3>${itemCodeHelp}</h3><div class="help-image"><img src="images/${itemImage}" alt=""></div>`);
+            infoWindow.setContent(`<h3>${itemAddress} (${itemLat},${itemLng})</h3><h3>${itemCodeHelp}</h3><div class="help-image"><img src="images/${itemImage}" alt=""></div>`);
             infoWindow.open(map, marker);
         });
         return marker;

@@ -90,7 +90,7 @@ async function initMap() {
                 itemAddress = item.address ? item.address : "",
                 itemCodeHelp = item.code_help ? item.code_help : "";
             console.log(itemLat, itemLng);
-            infoWindow.setContent(`<h3>${itemAddress} (${itemLat},${itemLng})</h3><h3>${itemCodeHelp}</h3><div class="help-image"><img src="./helpImages/${itemImage}"/></div>`);
+            infoWindow.setContent(`<h3>${itemAddress} (${itemLat},${itemLng})</h3><h3>${itemCodeHelp}</h3><div class="help-image"><img src="https://www.uniunidrivers.online/helpImages/${itemImage}"/></div>`);
             infoWindow.open(map, marker);
         });
         return marker;

@@ -56,7 +56,7 @@ async function initMap() {
         navigator.geolocation.watchPosition(updateUserPosition, handleLocationError);
     } else {
         // 浏览器不支持地理定位
-        handleLocationError(false, map.getCenter());
+        handleLocationError(false);
     }
     const infoWindow = new google.maps.InfoWindow({
         content: "",

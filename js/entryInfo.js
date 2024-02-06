@@ -21,7 +21,7 @@ function updateUserPosition(position) {
 }
 // 处理地理定位错误
 function handleLocationError(error) {
-    console.error("location error:", error);
+    alert.error("location error:", error);
 }
 async function initMap() {
     // Request needed libraries.
